@@ -10,13 +10,13 @@ module.exports = {
       { hid: "description", name: "description", content: "Nuxt.js project" }
     ],
     link: [
-      { rel: "icon", type: "image/x-icon", href: "/favicon.ico" },
-      /** Added for bulma */
+      { rel: "icon", type: "image/x-icon", href: "/favicon.ico" }
+      /** Added for bulma
       {
         rel: "stylesheet",
         href:
           "https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.min.css"
-      }
+      }*/
     ]
   },
   /*
@@ -44,6 +44,15 @@ module.exports = {
 
   /** Added modules and other configuration */
   modules: ["@nuxtjs/axios", "@nuxtjs/auth"],
+
+  devModules: ["@nuxtjs/vuetify"],
+
+  vuetify: {
+    // customVariables: ["~/assets/variables.scss"],
+    //theme: { },
+    //defaultAssets: { font: true, icons: true }
+    //preventFullImport: false
+  },
 
   axios: {
     baseURL: "http://127.0.0.1:8898/api/v1"

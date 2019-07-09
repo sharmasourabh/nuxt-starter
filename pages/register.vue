@@ -1,61 +1,47 @@
 <template>
-  <section class="section">
-    <div class="container">
-      <div class="columns">
-        <div class="column is-4 is-offset-4">
-          <h2 class="title has-text-centered">Register!</h2>
+  <v-layout column align-center>
+          <h2 class="title">Register!</h2>
 
           <Notification :message="error" v-if="error"/>
 
-          <form method="post" @submit.prevent="register">
-            <div class="field">
-              <label class="label">Username</label>
-              <div class="control">
-                <input
-                  type="text"
-                  class="input"
-                  name="username"
-                  v-model="username"
-                  required
-                >
-              </div>
-            </div>
-            <div class="field">
-              <label class="label">Email</label>
-              <div class="control">
-                <input
-                  type="email"
-                  class="input"
+          <v-form ref="form" v-model="valid" lazy-validation>
+            <v-text-field
+                  prepend-icon="mdi-account"
                   name="email"
+                  label="Email"
+                  type="email"
                   v-model="email"
+                  :rules="emailRules"
                   required
-                >
-              </div>
-            </div>
-            <div class="field">
-              <label class="label">Password</label>
-              <div class="control">
-                <input
-                  type="password"
-                  class="input"
+                />
+            <v-text-field
+                  prepend-icon="mdi-lock"
                   name="password"
-                  v-model="password"
+                  label="Password"
+                  id="password"
+                  type="password"
                   required
-                >
-              </div>
-            </div>
-            <div class="control">
-              <button type="submit" class="button is-dark is-fullwidth">Register</button>
-            </div>
-          </form>
+                  v-model="password"
+                  :rules="passwordRules"
+                />
+            <v-text-field
+                  prepend-icon="mdi-lock"
+                  name="confirmedPassword"
+                  label="Retype Password"
+                  id="confirmedPassword"
+                  type="password"
+                  required
+                  v-model="confirmedPassword"
+                  :rules="passwordRules"
+                />
+
+              <v-btn :disabled="!valid" @click="register">Register</v-btn>
+          </v-form>
 
           <div class="has-text-centered" style="margin-top: 20px">
             Already got an account? <nuxt-link to="/login">Login</nuxt-link>
           </div>
-        </div>
-      </div>
-    </div>
-  </section>
+  </v-layout>
 </template>
 
 <script>
@@ -72,7 +58,16 @@ export default {
       username: '',
       email: '',
       password: '',
-      error: null
+      confirmedPassword: '',
+      error: null,
+      valid: true,
+      emailRules: [
+        v => !!v || 'E-mail is required',
+        v => /.+@.+\..+/.test(v) || 'E-mail must be valid',
+      ],
+      passwordRules: [
+        v => !!v || 'Password is required'
+      ],
     }
   },
 

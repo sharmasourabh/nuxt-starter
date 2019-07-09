@@ -1,12 +1,10 @@
 <template>
-  <div class="notification is-danger">
-    {{ message }}
-  </div>
+  <v-alert :value="true" type="error">{{ message }}</v-alert>
 </template>
 
 <script>
 export default {
-  name: 'Notification',
-  props: ['message']
-}
+  name: "Notification",
+  props: ["message"]
+};
 </script>

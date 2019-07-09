@@ -1,0 +1,15 @@
+@import '~vuetify/src/styles/styles.sass';
+//@import '~vuetify/es5/util/colors';
+
+$primary: "#121212"; // a color that is not in the material colors palette
+// $accent: colors.grey.darken3;
+// $secondary: colors.amber.darken3;
+// $info: colors.teal.lighten1;
+// $warning: colors.amber.base;
+// $error: colors.deepOrange.accent4;
+// $success: colors.green.accent3;
+// The variables you want to modify
+$font-size-root: 14px;
+// For updating SASS lists
+$material-light: map-merge($material-light, ( cards: blue ));
+$btn-border-radius: 0px;
