@@ -1,7 +1,7 @@
 {
-  "name": "nuxt",
-  "version": "1.0.0",
-  "description": "Nuxt.js project",
+  "name": "nuxt-starter",
+  "version": "0.3.0",
+  "description": "Nuxt starter project with auth and vuetify",
   "author": "",
   "private": true,
   "scripts": {
@@ -20,13 +20,16 @@
   },
   "devDependencies": {
     "@nuxtjs/vuetify": "^1.0.0-beta.5",
-    "ava": "^2.1.0",
+    "ava": "^2.2.0",
     "babel-eslint": "^10.0.1",
     "eslint": "^4.19.1",
+    "eslint-config-prettier": "^6.0.0",
     "eslint-friendly-formatter": "^4.0.1",
     "eslint-loader": "^2.1.1",
+    "eslint-plugin-prettier": "^3.1.0",
     "eslint-plugin-vue": "^4.0.0",
     "jsdom": "^15.1.1",
-    "json-server": "^0.15.0"
+    "json-server": "^0.15.0",
+    "prettier": "^1.18.2"
   }
 }

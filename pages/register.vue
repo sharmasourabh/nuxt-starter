@@ -1,97 +1,98 @@
 <template>
   <v-layout column align-center>
-          <h2 class="title">Register!</h2>
+    <h2 class="title">Register!</h2>
 
-          <Notification :message="error" v-if="error"/>
+    <Notification v-if="error" :message="error" />
 
-          <v-form ref="form" v-model="valid" lazy-validation>
-            <v-text-field
-                  prepend-icon="mdi-account"
-                  name="email"
-                  label="Email"
-                  type="email"
-                  v-model="email"
-                  :rules="emailRules"
-                  required
-                />
-            <v-text-field
-                  prepend-icon="mdi-lock"
-                  name="password"
-                  label="Password"
-                  id="password"
-                  type="password"
-                  required
-                  v-model="password"
-                  :rules="passwordRules"
-                />
-            <v-text-field
-                  prepend-icon="mdi-lock"
-                  name="confirmedPassword"
-                  label="Retype Password"
-                  id="confirmedPassword"
-                  type="password"
-                  required
-                  v-model="confirmedPassword"
-                  :rules="passwordRules"
-                />
+    <v-form ref="form" v-model="valid" :lazy-validation="lazy">
+      <v-text-field
+        v-model="email"
+        :rules="emailRules"
+        prepend-icon="mdi-account"
+        name="email"
+        label="Email"
+        type="email"
+        required
+      />
+      <v-text-field
+        id="password"
+        v-model="password"
+        :rules="passwordRules"
+        prepend-icon="mdi-lock"
+        name="password"
+        label="Password"
+        type="password"
+        required
+      />
+      <v-text-field
+        id="confirmedPassword"
+        v-model="confirmedPassword"
+        :rules="passwordRules"
+        prepend-icon="mdi-lock"
+        name="confirmedPassword"
+        label="Retype Password"
+        type="password"
+        required
+      />
 
-              <v-btn :disabled="!valid" @click="register">Register</v-btn>
-          </v-form>
+      <v-btn :disabled="!valid" @click="register">Register</v-btn>
+    </v-form>
 
-          <div class="has-text-centered" style="margin-top: 20px">
-            Already got an account? <nuxt-link to="/login">Login</nuxt-link>
-          </div>
+    <div class="has-text-centered" style="margin-top: 20px">
+      Already got an account? <nuxt-link to="/login">Login</nuxt-link>
+    </div>
   </v-layout>
 </template>
 
 <script>
-import Notification from '~/components/Notification'
+import Notification from "~/components/Notification";
 
 export default {
-  middleware: 'guest',
+  middleware: "guest",
   components: {
-    Notification,
+    Notification
   },
 
   data() {
     return {
-      username: '',
-      email: '',
-      password: '',
-      confirmedPassword: '',
-      error: null,
       valid: true,
+      lazy: false,
+      username: "",
+      email: "",
+      password: "",
+      confirmedPassword: "",
+      error: null,
       emailRules: [
-        v => !!v || 'E-mail is required',
-        v => /.+@.+\..+/.test(v) || 'E-mail must be valid',
+        v => !!v || "E-mail is required",
+        v => /.+@.+\..+/.test(v) || "E-mail must be valid"
       ],
-      passwordRules: [
-        v => !!v || 'Password is required'
-      ],
-    }
+      passwordRules: [v => !!v || "Password is required"]
+    };
   },
 
   methods: {
     async register() {
       try {
-        await this.$axios.post('register', {
-          username: this.username,
+        await this.$axios.post("register", {
           email: this.email,
           password: this.password
-        })
+        });
 
-        await this.$auth.loginWith('local', {
+        await this.$auth.loginWith("local", {
           data: {
             email: this.email,
             password: this.password
-          },
-        })
+          }
+        });
 
-        this.$router.push('/')
+        this.$router.push("/");
       } catch (e) {
-        this.error = e.response.data.message
+        this.error =
+          e.response && e.response.data && e.response.data.message
+            ? e.response.data.message
+            : e;
       }
     }
   }
-}
+};
 </script>

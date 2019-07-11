@@ -39,6 +39,8 @@ module.exports = {
           exclude: /(node_modules)/
         });
       }
+      if (isClient) config.devtool = "eval-source-map";
+      else config.devtool = "inline-source-map";
     }
   },
 
@@ -55,7 +57,7 @@ module.exports = {
   },
 
   axios: {
-    baseURL: "http://127.0.0.1:8898/api/v1"
+    baseURL: "http://127.0.0.1:8888/api/v1"
   },
 
   auth: {
